@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <div id="root">
+      <h2 class="widget-title" style="width: 100%;">
+        Widgets
+      </h2>
+        <div widget="widgets/a">
+          <div widget="widgets/b">
+            <div widget="widgets/a"></div>
+          </div>
+        </div>
+        <div widget="widgets/b">
+        </div>
+        
+    </div>
+    <div id="logs"></div>
+    <button id="initBtn">Init</button>
+    <button id="destroyBtn">Destroy</button>
+    <button id="doneBtn">Done</button>
+    <button id="failBtn">Fail</button>
+</body>
+<script type="module">
+    import X from './handlerDom.js';
+
+    const x = new X();
+
+    x.init(document.getElementById('root'), (err) => {
+        if (err) {
+          x.addNewLog(`Error init ${error}`)
+        } else {
+          x.addNewLog(`Widgets ready`)
+        }
+    })
+
+    document.getElementById('initBtn').addEventListener('click', () => {
+      if(x.selectedWidget) {
+        x.init(x.selectedWidget, (err) => {
+            if (err) {
+              x.addNewLog(`Error init ${error}`)
+            } else {
+                x.addNewLog(`Widgets ready`)
+            }
+        });
+      }
+        
+    });
+
+    document.getElementById('destroyBtn').addEventListener('click', () => {
+        x.destroy(x.selectedWidget);  // Niszcz zaznaczony widget
+    });
+
+    document.getElementById('doneBtn').addEventListener('click', () => {
+        x.doneSelected();  // Oznacz zaznaczony widget jako "done"
+    });
+
+    document.getElementById('failBtn').addEventListener('click', () => {
+        x.failSelected();  // Oznacz zaznaczony widget jako "failed"
+});
+</script>
+
+</html>

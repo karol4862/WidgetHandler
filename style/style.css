@@ -1,0 +1,27 @@
+#root {
+    display: flex;
+    flex-wrap: wrap;
+}
+.widget {
+    padding: 15px;
+    border: 1px solid #777;
+    margin-bottom: 15px;
+}
+
+.selected-widget {
+    border: 2px solid blue;
+}
+
+.widget-fail {
+    border: 2px solid red;
+}
+
+.widget-done {
+    border: 2px solid green;
+}
+
+#logs {
+    max-height: 200px;
+    overflow: auto;
+    padding: 15px
+}
